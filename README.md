@@ -1,10 +1,9 @@
 # McHacks2025
 Tentative Title Hunger Bunger
-# Image Inpainting
 
 ## Installation
 
-Create Package
+Create environment
 ```bash
 conda create -c conda-forge -n hunger-bunger python=3.12
 ```
