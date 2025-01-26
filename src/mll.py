@@ -11,6 +11,9 @@ class mll:
         self.ONGOING_TASKS = []
         self.team = team
 
+    def add_to_ongoing(task, manpower):
+        for key,value in team.devs.items()
+        ONGOING_TASKS.append(task)
 
     def schedule(self):
         manpower_pts = team.manpower_pts
