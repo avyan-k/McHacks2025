@@ -1,3 +1,4 @@
+import os
 from db_utils import *
 import sqlite3 as sql
 from task import *
@@ -7,8 +8,10 @@ import datetime
 
 
 
-def open_database():
-    conn = connect_to_database("mchacks25.db")
+def open_database(filename = "mchacks25.db"):
+    if os.path.isfile(filename):
+        os.remove(filename)
+    conn = connect_to_database(filename)
     create_table(conn, "Tasks", """
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -65,22 +68,27 @@ def open_database():
     
     return conn
 def store_task_to_database(database, task:Task):
-    database_cursor = database.cursor()
-    insert_record(database_cursor, "Tasks", "name, deadline, estimated_time, priority", (task.name, task.deadline, task.estimated_time,task.priority))
-    pass
-    
-def get_all_incomplete_tasks():
+    cursor = database.cursor()
+    insert_record(database, "Tasks", "name, deadline, estimated_time, priority", (task.name, task.deadline, task.estimated_time,task.priority))
+    cursor.execute("SELECT last_insert_rowid()")
+    task_id = cursor.fetchone()
+    if task_id:
+        print(task_id[0])
+        insert_record(database, "Incoming_Task", "task_id", (task_id))
+    return task_id
 
-    pass
+def update_task()
+    
+def get_all_incoming_tasks():
+    return query_data(database.cursor(), "SELECT Tasks.* FROM Tasks JOIN Incoming_Task ON Tasks.id = Incoming_Task.task_id;")
 
 if __name__ == "__main__":
     database = open_database()
-    test_task = Task(name = "First",deadline = datetime.date.fromisoformat('20191204'), estimated_time = datetime.time.fromisoformat('04:23:01'),priority = 0)
-    database.cursor().execute("SELECT name FROM PRAGMA_TABLE_INFO('Tasks')")
-    print(database.cursor().fetchall())
+    test_task = Task(name = "First",deadline = datetime.date.fromisoformat('20191204'), estimated_time = 10,priority = 0)
     store_task_to_database(database,test_task)
     tasks = query_data(database.cursor(), "SELECT * FROM Tasks")
     print("Tasks:", tasks)
+    print(get_all_incoming_tasks())
 # searching through all incomplete task with a certain priority
 # deleting from incoming table
 # update 

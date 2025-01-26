@@ -8,7 +8,8 @@ def create_table(connection, name, schema):
     cursor.execute(f"CREATE TABLE IF NOT EXISTS {name} ({schema})")
     connection.commit()
 
-def insert_record(cursor, name, columns, values):
+def insert_record(connection, name, columns, values):
+    cursor = connection.cursor()
     placeholders = ", ".join("?" for _ in values)  # Generate "?" placeholders
     query = f"INSERT INTO {name} ({columns}) VALUES ({placeholders})"
     cursor.execute(query, values)
@@ -30,21 +31,6 @@ if __name__ == "__main__":
     connection = connect_to_database("example.db")
     cursor = connection.cursor()
 
-    create_table(cursor, "users", """
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        age INTEGER,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    """)
-    users = query_data(cursor, "SELECT * FROM users")
-    print("Users:", users)
-
-    insert_record(cursor, "users", "name, email, age", ("Alice", "alice@example.com", 30))
-    insert_record(cursor, "users", "name, email, age", ("Bob", "bob@example.com", 25))
-    insert_record(cursor, "users", "name, email, age", ("Charlie", "charlie@example.com", 35))
-    users = query_data(cursor, "SELECT * FROM users")
-    print("Users:", users)
     update_record(connection, "users", "age = ?", "name = ?", (31, "Alice"))
 
 
