@@ -1,7 +1,16 @@
 import task
+import math
 import dev
 
 class Team:
+    """
+    :param devs: Dictionary of all the developers in the team
+    :param manpower_pts: Sum of all the experience levels of the developers in the team
+    :param max_mp_percentage: Maximum percentage of the manpower pts that can be assigned to a SINGLE task
+    :param priority_queues_intervals: 4 int lists of length 2, (minNbHours, maxNbHours) specifying the interval of the
+    delta values accepted into priority queue 1,2,3,4  for the team. Queue 5 will take any task exceeding
+    the value for 4.
+    """
     def __init__(self, devs:dict = None, manpower_pts:int = 0, max_mp_percentage:float=0, priority_queues_intervals:dict=None ):
         if devs is not None:
             self.devs = devs
@@ -68,5 +77,11 @@ class Team:
         Only use AFTER updating manpower_pts. Quantum update to max_manpower
         :return: max_manpower
         """
-        self.max_manpower = self.manpower_pts * self.max_mp_percentage
+        self.max_manpower = math.ceil(self.manpower_pts * self.max_mp_percentage)
         return self.max_manpower
+
+    def get_interval_by_queue(self, queue_nb:int):
+        if queue_nb in self.priority_queues_intervals.keys():
+            return self.priority_queues_intervals[queue_nb]
+        else:
+            print("Interval not registered for that queue number!")
