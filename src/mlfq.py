@@ -51,7 +51,7 @@ class MLFQ:
 
         #replace tasks
         for (i in range(len(least_priority_task.attributed_devs))):
-            least_priority_task.estimated_time -= nb_seconds_delta(task.task_start_time)
+            least_priority_task.estimated_time -= nb_seconds_delta(task.task_start_time) * least_priority_task.attributed_devs[i].experience_level
             dev.current_task = None
             dev.task_start_time = None
             team.manpower_pts += dev.experience_level
@@ -152,6 +152,13 @@ class MLFQ:
                     else :
                         # If the task was seen before in the update, don't check it twice.
                         pass
+
+    # def periodic_ongoing_update(self) :
+    #     for (task in ONGOING_TASKS) :
+    #         for (i in range(len(task.attributed_devs))):
+    #             least_priority_task.estimated_time -= nb_seconds_delta(task.task_start_time)* least_priority_task.attributed_devs[i].experience_level
+            
+    #         if (least_priority_task.estimated_time)
     
     def periodic_ongoing_update(self, current_time:datetime.time):
 
