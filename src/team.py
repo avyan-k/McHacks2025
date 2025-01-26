@@ -1,5 +1,5 @@
 import task
-import devs
+import dev
 
 class Team:
     def __init__(self, devs:dict = None, manpower_pts:int = 0, max_manpower:int = 0 ):
