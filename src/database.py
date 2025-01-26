@@ -5,8 +5,8 @@ from task import *
 
 
 
-conn = connect_to_database("mchacks25.db")
-crsr = conn.cursor()
+CONN = connect_to_database("mchacks25.db")
+CRSR = conn.cursor()
 
 create_table(crsr, "Tasks", """
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,12 +17,15 @@ create_table(crsr, "Tasks", """
     """)
 
 create_table(crsr, "Features", """
-
+        FOREIGN KEY (id) REFERENCES Tasks
     """)
 
-create_table(crsr, "Features", """
+create_table(crsr, "Bugs", """
+        FOREIGN KEY (id) REFERENCES Tasks
     """)
 
+
+create_table
 def store_task_to_database(task:Task):
 
     pass

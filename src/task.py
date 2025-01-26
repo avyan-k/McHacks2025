@@ -2,7 +2,7 @@ import datetime
 class Task:
     def __init__(self,deadline:datetime.date,estimated_time:datetime.time,priority:int):
         self.deadline = deadline
-        self.estimated_time
+        self.estimated_time = estimated_time
 
     def __init__(self,query): 
         task_id,deadline,estimated_time,priority = query
