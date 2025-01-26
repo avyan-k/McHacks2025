@@ -14,4 +14,11 @@ def mlfq():
 
 def add_task(new_task:Task):
     now = datetime.datetime.now()
-    nb_hours_until_deadline = 
+    deadline = new_task.deadline
+    deadline_hours = nb_hours_until_deadline(deadline)
+
+def nb_hours_until_deadline(deadline) :
+    now = datetime.datetime.now()
+    return ((deadline.year - now.year) * 8760 + 
+    (deadline.month - now.month) * 730 + (deadline.day - now.day) * 24)
+
