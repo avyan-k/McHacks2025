@@ -3,6 +3,7 @@ import datetime
 from task import Task
 from team import Team
 import math 
+import dev
 
 
 class mll:
@@ -14,9 +15,23 @@ class mll:
     def add_to_ongoing(task):
         max_manpower_pts = team.max_manpower_pts
         total_manpower = 0 #how much manpower added so far
-        for dev,manpower in team.devs.items()
-            if ()
-        ONGOING_TASKS.append(task)
+        for _,dev in team.devs.items()
+            if (dev.current_task != None) : 
+                continue
+            if (dev.experience_level + total_manpower > manpower_pts):
+            continue
+        
+            dev.current_task = task
+            task.attributed_devs.append(dev)
+            team.manpower_pts -= dev.experience_level
+            ONGOING_TASKS.append(task)
+    
+    def remove_ongoing():
+        least_priority_task = None
+        for task in ONGOING_TASKS.items():
+            #
+
+        
 
     def schedule(self):
         manpower_pts = team.manpower_pts
