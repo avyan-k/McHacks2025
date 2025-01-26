@@ -12,8 +12,9 @@ def open_database():
     create_table(crsr, "Tasks", """
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        deadline DATE NOT NULL,
-        estimated_time INTEGER,
+        deadline DATE,
+        estimated_time INTEGER NOT NULL,
+        priority INTEGER NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     """)
 
@@ -33,21 +34,40 @@ def open_database():
             FOREIGN KEY (id) REFERENCES Tasks
         """)
 
-    create_table(crsr,"""Ongoing Task,
+    create_table(crsr,"""Ongoing Tasks,
             FOREIGN KEY (id) REFERENCES Tasks
         """)
 
-    create_table(crsr,"""Complete Task,
+    create_table(crsr,"""Complete Tasks,
+            FOREIGN KEY (id) REFERENCES Tasks
+        """)
+    
+    create_table(crsr,"""Devs
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            experience_level TEXT NOT NULL
+        """)
+    
+    create_table(crsr,"""AssignedTask
+            FOREIGN KEY (id) REFERENCES Tasks
+
+            """)
+    create_table(crsr,"""Devs
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            experience_level TEXT NOT NULL,
             FOREIGN KEY (id) REFERENCES Tasks
         """)
     return conn,crsr
-def store_task_to_database(task:Task):
-    
+def store_task_to_database(database_cursor, task:Task):
+    insert_record(database_cursor, "Tasks", "name, deadline, estimated_time", (task.name, task.deadline, 30))
     pass
     
 def get_all_incomplete_tasks():
 
     pass
+
+
 # searching through all incomplete task with a certain priority
 # deleting from incoming table
 # update 
