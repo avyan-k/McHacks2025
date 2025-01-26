@@ -17,7 +17,6 @@ parent_dir = dirname(current_dir)
 sys.path.append(join(parent_dir, 'src'))
 import database
 import task
-sys.path.append(current_dir)
 
 
 
