@@ -14,10 +14,12 @@ class Task:
         self.estimated_time = estimated_time
         self.priority = priority
         self.status = status
+    def __str__(self):
+        return (f"Task of {self.name} with id: {self.task_id}, priority {self.priority}")
     @staticmethod
-    def fromquery(query): 
+    def fromquery(query,status): # utility method for get all tasks SQL query method  to be turned into tasks
         task_id,name,deadline,estimated_time,priority,_ = query
-        task = Task(name,deadline,estimated_time,priority)
+        task = Task(name,deadline,estimated_time,priority,status)
         task.task_id = task_id
         return task
 
