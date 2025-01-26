@@ -50,7 +50,8 @@ class MLFQ:
         print(f"Updated task {task.name} from {previous_priority} to {task.priority}")
 
         # Remove the task from the previous priority deque
-        self.PRIORITY_QUEUES[previous_priority].remove(task)
+        if task in self.PRIORITY_QUEUES[previous_priority]:
+            self.PRIORITY_QUEUES[previous_priority].remove(task)
 
         # Add the task to its new priority queue
         self.PRIORITY_QUEUES[task.priority].appendleft(task)

@@ -17,6 +17,7 @@ def populate_database(algorithm:MLFQ, team:Team):
 def main():
     running = True
     default_team=Team()
+    default_team.priority_queues_intervals = {1:[0, 24], 2:[24, 168], 3:[168,672], 4:[672, 2016]}
     algorithm = MLFQ(default_team)
 
     populate_database(algorithm, default_team)
