@@ -6,7 +6,7 @@ class Status(Enum):
     COMPLETE = 2
     INCOMPLETE = 3
 class Task:
-    def __init__(self,name:str,deadline:datetime.date,estimated_time:int,priority:int,status:Status):
+    def __init__(self,name:str,deadline:datetime.date,estimated_time:int,priority:int,status:Status=Status.INCOMING):
         self.task_id = None
         self.attributed_devs = [] # ONCE MLFQ PUTS TASK IN "ONGOING" FOR THE FIRST TIME, ASSIGN DEVS
         self.name = name
