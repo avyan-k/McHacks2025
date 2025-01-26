@@ -7,7 +7,7 @@ class Team:
         self.manpower_pts = manpower_pts
         self.max_manpower = max_manpower
 
-    def add_dev(self, dev:devs.Devs):
+    def add_dev(self, dev:dev.Dev):
         self.devs[dev.dev_id] = dev
 
     def remove_dev(self, dev:devs.Devs=None, name:str=None, dev_id:int=None):
