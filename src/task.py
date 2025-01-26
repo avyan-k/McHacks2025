@@ -21,3 +21,5 @@ class Feature(Task):
         super.__init__(deadline,estimated_time,priority)
     def __init__(self, query):
         super().__init__(query)
+
+Task_NULL = Task(None, None, None, None)
