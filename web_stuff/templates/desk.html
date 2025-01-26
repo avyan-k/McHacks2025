@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desk Layout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="title-bar">
+            <h1>TITLE</h1>
+        </div>
+        
+        <div class="team-section">
+            <div class="team-box">
+                <div class="team-text">Team</div>
+                <div class="dropdown">
+                    <div class="dropdown-button">▼</div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" id="case1">Case 1</div>
+                        <div class="dropdown-item" id="case2">Case 2</div>
+                        <div class="dropdown-item" id="case3">Case 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+           
+        
+    
+        <div class="columns">
+            <div class="column incoming-column">
+                <div class="task-box incoming">
+                    <h2 class="task-title">Incoming</h2>
+                </div>
+            </div>
+
+            <div class="column incomplete-column">
+                <div class="task-box incomplete">
+                    <h2 class="task-title">Incomplete</h2>
+                </div>
+            </div>
+
+            <div class="column in-progress-column">
+                <div class="task-box in-progress">
+                    <h2 class="task-title">In Progress</h2>
+                </div>
+            </div>
+
+            <div class="column done-column">
+                <div class="task-box done">
+                    <h2 class="task-title">Done!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
