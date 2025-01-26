@@ -11,8 +11,11 @@ class mll:
         self.ONGOING_TASKS = []
         self.team = team
 
-    def add_to_ongoing(task, manpower):
-        for key,value in team.devs.items()
+    def add_to_ongoing(task):
+        max_manpower_pts = team.max_manpower_pts
+        total_manpower = 0 #how much manpower added so far
+        for dev,manpower in team.devs.items()
+            if ()
         ONGOING_TASKS.append(task)
 
     def schedule(self):
