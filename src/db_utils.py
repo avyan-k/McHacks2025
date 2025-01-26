@@ -25,6 +25,11 @@ def update_record(connection, name: str, set, where, values):
     cursor.execute(query, values)
     connection.commit()
 
+def delete_record(conn: sql.Connection, name, where, values):
+    cursor = conn.cursor()
+    query = f"DELETE FROM {name} WHERE {where}"
+    cursor.execute(query, values)
+    conn.commit()
 
 
 if __name__ == "__main__":

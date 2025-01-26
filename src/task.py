@@ -7,15 +7,18 @@ class Status(Enum):
     INCOMPLETE = 3
 class Task:
     def __init__(self,name:str,deadline:datetime.date,estimated_time:int,priority:int,status:Status):
+        self.task_id = None
         self.name = name
         self.deadline = deadline
         self.estimated_time = estimated_time
         self.priority = priority
         self.status = status
-
-    def fromquery(self,query): 
-        task_id,deadline,estimated_time,priority = query
-        pass
+    @staticmethod
+    def fromquery(query): 
+        task_id,name,deadline,estimated_time,priority,_ = query
+        task = Task(name,deadline,estimated_time,priority)
+        task.task_id = task_id
+        return task
 
 class Bug(Task):
     def __init__(self,deadline:datetime.date,estimated_time:datetime.time,priority:int):
@@ -29,4 +32,4 @@ class Feature(Task):
     def __init__(self, query):
         super().__init__(query)
 
-Task_NULL = Task(None, None, None, None)
+Task_NULL = Task(None, None, None, None,None)

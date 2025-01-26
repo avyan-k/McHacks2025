@@ -31,22 +31,22 @@ def open_database(filename = "mchacks25.db"):
             FOREIGN KEY (task_id) REFERENCES Tasks(id)
         """)
 
-    create_table(conn,"Incoming_Task", """
+    create_table(conn,"INCOMING_Task", """
             task_id INTEGER PRIMARY KEY,
             FOREIGN KEY (task_id) REFERENCES Tasks(id)
         """)
 
-    create_table(conn,"Incomplete_Task", """
+    create_table(conn,"INCOMPLETE_Task", """
             task_id INTEGER PRIMARY KEY,
             FOREIGN KEY (task_id) REFERENCES Tasks(id)
         """)
 
-    create_table(conn,"Ongoing_Tasks", """
+    create_table(conn,"ONGOING_Tasks", """
             task_id INTEGER PRIMARY KEY,
             FOREIGN KEY (task_id) REFERENCES Tasks(id)
         """)
 
-    create_table(conn,"Complete_Tasks", """
+    create_table(conn,"COMPLETE_Tasks", """
             task_id INTEGER PRIMARY KEY,
             FOREIGN KEY (task_id) REFERENCES Tasks(id)
         """)
@@ -73,22 +73,32 @@ def store_task_to_database(database, task:Task):
     cursor.execute("SELECT last_insert_rowid()")
     task_id = cursor.fetchone()
     if task_id:
-        print(task_id[0])
-        insert_record(database, "Incoming_Task", "task_id", (task_id))
+        insert_record(database, "INCOMING_Task", "task_id", (task_id))
+    task.task_id = task_id
     return task_id
 
-def update_task()
+def update_task(task:Task, status:Status):
+    assert task.status != Status.COMPLETE
+    old_status_name_string = task.status.name
+    new_status_name_string = status.name
+    delete_record()
+
+
+    pass
+
     
 def get_all_incoming_tasks():
-    return query_data(database.cursor(), "SELECT Tasks.* FROM Tasks JOIN Incoming_Task ON Tasks.id = Incoming_Task.task_id;")
+    return query_data(database.cursor(), "SELECT Tasks.* FROM Tasks JOIN INCOMING_Task ON Tasks.id = INCOMING_Task.task_id;")
 
 if __name__ == "__main__":
     database = open_database()
-    test_task = Task(name = "First",deadline = datetime.date.fromisoformat('20191204'), estimated_time = 10,priority = 0)
+    test_task = Task(name = "First",deadline = datetime.date.fromisoformat('20191204'), estimated_time = 10,priority = 0, status=Status.COMPLETE)
     store_task_to_database(database,test_task)
     tasks = query_data(database.cursor(), "SELECT * FROM Tasks")
     print("Tasks:", tasks)
     print(get_all_incoming_tasks())
+    update_task(test_task,status=Status.INCOMING)
+    print(status.name)
 # searching through all incomplete task with a certain priority
 # deleting from incoming table
 # update 
