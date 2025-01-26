@@ -23,16 +23,16 @@ class Task:
         task.task_id = task_id
         return task
 
+
+
+
+
 class Bug(Task):
     def __init__(self,deadline:datetime.date,estimated_time:datetime.time,priority:int):
         super.__init__(deadline,estimated_time,priority)
-    def __init__(self, query):
-        super().__init__(query)
 
 class Feature(Task):
     def __init__(self,deadline:datetime.date,estimated_time:datetime.time,priority:int):
         super.__init__(deadline,estimated_time,priority)
-    def __init__(self, query):
-        super().__init__(query)
 
 Task_NULL = Task(None, None, None, None,None)

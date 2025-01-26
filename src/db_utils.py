@@ -36,8 +36,6 @@ if __name__ == "__main__":
     connection = connect_to_database("example.db")
     cursor = connection.cursor()
 
-    update_record(connection, "users", "age = ?", "name = ?", (31, "Alice"))
-
 
 
     connection.close()
