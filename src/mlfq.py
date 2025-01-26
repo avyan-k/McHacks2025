@@ -1,6 +1,6 @@
 from collections import deque
 import datetime
-from task import Task
+from task import *
 from team import Team
 import math
 import database
@@ -86,6 +86,13 @@ class MLFQ:
                         # If the task was seen before in the update, don't check it twice.
                         pass
 
-    def 
+    def change_status_to_ongoing(self, task:Task):
+        database.update_task(self.database, task, Status.ONGOING)
+
+    def change_status_to_incomplete(self, task:Task):
+        database.update_task(self.database, task, Status.INCOMPLETE)
+
+    def change_status_to_complete(self, task:Task):
+        database.update_task(self.database, task, Status.COMPLETE)
 
 
