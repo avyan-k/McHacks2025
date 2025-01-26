@@ -69,6 +69,7 @@ body {
 .column {
     flex: 1;
     max-width: 308px;
+
     height: 650px;
     background: linear-gradient(180deg, #EAD6B2 0%, #FFF8EA 100%);
     border-radius: 80px;
@@ -78,6 +79,9 @@ body {
     padding: 26px 22px;
     position: relative;
 }
+
+
+
 
 /* Column Titles */
 .column-title {
@@ -118,22 +122,36 @@ body {
 }
 
 .text-box {
-    width: 150px;
+    width: 200px;
     height: 30px;
     border-radius: 5px;
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 10px;
 
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
     color: #008B8B;
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Mochiy Pop One', sans-serif;
 }
 
+.all-tasks {
+    flex: 1;
+    max-width: 300px;
+    overflow:scroll;
 
+    height: 600px;
+    background-color: transparent;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 26px 22px;
+    position: relative;
+}
 
 .task-title {
     font-size: 24px;

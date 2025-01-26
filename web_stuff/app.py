@@ -44,15 +44,6 @@ def home():
 
     return render_template("desk.html",tasks_dict = tasks_dict, form = form)
 
-@app.route('/', methods =["GET", "POST"])
-def get_new_task():
-    if request.method == "POST":
-       # getting input with name = fname in HTML form
-       first_name = request.form.get("fname")
-       # getting input with name = lname in HTML form 
-       last_name = request.form.get("lname") 
-       return "Your name is "+first_name + last_name
-    return render_template("form.html")
 
 if __name__ == "__main__" :
  app.run(debug=True) #detect changes and update

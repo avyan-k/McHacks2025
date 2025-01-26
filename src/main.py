@@ -5,7 +5,12 @@ from mlfq import *
 import datetime
 import database
 import data_generation
-
+from os.path import dirname, abspath, join
+import sys
+current_dir = dirname(abspath(__file__))
+parent_dir = dirname(current_dir)
+sys.path.append(join(parent_dir, 'web_stuff'))
+import app
 
 def populate_database(algorithm:MLFQ, team:Team):
     task_list, dev_list = data_generation.generate_data()
@@ -22,9 +27,12 @@ def main():
 
     populate_database(algorithm, default_team)
     default_team.update_manpower_global()
-
+    app.app.run(debug=True)
     while running:
         time_now = datetime.datetime.now().time()
+        while len(app.WEB_QUEUE) > 0:
+            current_task = app.WEB_QUEUE.pop()
+            algorithm.add_task_incoming(current_task)
 
         # Periodic all queue update every hour
         algorithm.periodic_queues_update(current_time=time_now)

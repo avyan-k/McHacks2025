@@ -47,11 +47,13 @@
                     <div class="task-box incoming">
                         <h2 class="task-title">Incoming</h2>
                     </div>
+                    <div class="all-tasks">
                         {% for task in tasks_dict['incoming'] %}
-                    <div class="text-box">
-                        {{ task }} Task
-                    </div>   
-                        {% endfor %}
+                        <div class="text-box">
+                            {{ task }} Task
+                        </div>   
+                            {% endfor %}
+                    </div>
                 </div>
 
 
@@ -59,34 +61,44 @@
                 <div class="task-box in-progress">
                     <h2 class="task-title">Ongoing</h2>
                 </div>
+                <div class="all-tasks">
+
                 {% for task in tasks_dict['ongoing']  %}
                 <div class="text-box">
                     {{ task }} Task
                 </div>   
                     {% endfor %}
+                </div>
             </div>
 
             <div class="column incomplete-column">
                 <div class="task-box incomplete">
                     <h2 class="task-title">Incomplete</h2>
                 </div>
+                <div class="all-tasks">
+
                     {% for task in tasks_dict['incomplete']  %}
                     <div class="text-box">
                         {{ task }} Task
                     </div>   
                         {% endfor %}
+                    </div>
+
             </div>
 
             <div class="column done-column">
                 <div class="task-box done">
                     <h2 class="task-title">Done!</h2>
                 </div>
+                <div class="all-tasks">
+
                     {% for task in tasks_dict['complete'] %}
                     <div class="text-box">
                         {{ task }} Task
                     </div>   
                         {% endfor %}
                 
+            </div>
             </div>
         </div>
     </div>
