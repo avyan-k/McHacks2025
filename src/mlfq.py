@@ -7,13 +7,16 @@ from team import Team
 class MLFQ:
     def __init__(self, team:Team=Team()):
         self.PRIORITY_QUEUES = {k:v for k,v in [(i, deque()) for i in range(1, 6)]}
+        self.ONGOING_TASKS = []
         self.team = team
+        self.remaing_manpower = team.manpower_pts
+
 
     def add_task(self, new_task:Task):
         queue_nb = self.update_task_priority(new_task)
-        for i in range(1,6):
-            if queue_nb == i:
-                self.PRIORITY_QUEUES[i].appendleft(new_task)
+        self.PRIORITY_QUEUES[queue_nb].appendleft(new_task)
+        if (self.remaing_manpower > 0) : 
+            pass 
 
     def nb_hours_until_deadline(self, deadline) :
         now = datetime.datetime.now()
@@ -77,5 +80,6 @@ class MLFQ:
                         # If the task was seen before in the update, don't check it twice.
                         pass
 
+    def 
 
 
