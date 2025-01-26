@@ -8,7 +8,7 @@ class Status(Enum):
 class Task:
     def __init__(self,name:str,deadline:datetime.date,estimated_time:int,priority:int,status:Status):
         self.task_id = None
-        self.attributed_devs = None # ONCE MLFQ PUTS TASK IN "ONGOING" FOR THE FIRST TIME, ASSIGN DEVS
+        self.attributed_devs = [] # ONCE MLFQ PUTS TASK IN "ONGOING" FOR THE FIRST TIME, ASSIGN DEVS
         self.name = name
         self.deadline = deadline
         self.estimated_time = estimated_time
