@@ -14,10 +14,8 @@ def insert_record(cursor, name, columns, values):
     cursor.execute(query, values)
     connection.commit()
 
-def query_data(cursor, query):
-    """Execute a SELECT query and return the results."""
-    cursor = connection.cursor()
-    cursor.execute(query)
+def query_data(cursor, query: str, params) :
+    cursor.execute(query, params or ())
     return cursor.fetchall()
 
 def update_record(connection, name: str, set, where, values):

@@ -15,6 +15,7 @@ create_table(crsr, "Tasks", """
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     """)
 
+
 def get_all_incomplete_tasks():
 
     pass
