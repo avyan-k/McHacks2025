@@ -1,19 +1,25 @@
 from collections import deque
 import datetime
-from task import Task
+from task import *
 from team import Team
+import math
+import database
+import db_utils
 
 
 class MLFQ:
     def __init__(self, team:Team=Team()):
         self.PRIORITY_QUEUES = {k:v for k,v in [(i, deque()) for i in range(1, 6)]}
+        self.ONGOING_TASKS = []
         self.team = team
+        self.database = database.open_database()
 
-    def add_task(self, new_task:Task):
+    def add_task_incoming(self, new_task:Task):
         queue_nb = self.update_task_priority(new_task)
-        for i in range(1,6):
-            if queue_nb == i:
-                self.PRIORITY_QUEUES[i].appendleft(new_task)
+        self.PRIORITY_QUEUES[queue_nb].appendleft(new_task)
+
+        database.store_task_to_database(self.database, new_task)
+            
 
     def nb_hours_until_deadline(self, deadline) :
         now = datetime.datetime.now()
@@ -26,7 +32,7 @@ class MLFQ:
         :param task: The task whose delta value we are calculating
         :return: task.deadline - current_time - task.estimated_time
         """
-        return self.nb_hours_until_deadline(task.deadline) - task.estimated_time
+        return self.nb_hours_until_deadline(task.deadline) - math.ceil(task.estimated_time / 3600)
 
     def update_task_priority(self, task:Task):
         """
@@ -48,6 +54,9 @@ class MLFQ:
 
         # Add the task to its new priority queue
         self.PRIORITY_QUEUES[task.priority].appendleft(task)
+
+        # Updating record in the database
+        db_utils.update_record(self.database, name = "Tasks", set = "priority = ?", where = "id = ?", values=(task.priority, task.task_id))
 
         return task.priority
 
@@ -77,5 +86,13 @@ class MLFQ:
                         # If the task was seen before in the update, don't check it twice.
                         pass
 
+    def change_status_to_ongoing(self, task:Task):
+        database.update_task(self.database, task, Status.ONGOING)
+
+    def change_status_to_incomplete(self, task:Task):
+        database.update_task(self.database, task, Status.INCOMPLETE)
+
+    def change_status_to_complete(self, task:Task):
+        database.update_task(self.database, task, Status.COMPLETE)
 
 
