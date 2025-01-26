@@ -2,7 +2,9 @@ from collections import deque
 import datetime
 from task import Task
 from team import Team
-import math 
+import math
+import database
+import db_utils
 
 
 class MLFQ:
@@ -10,13 +12,13 @@ class MLFQ:
         self.PRIORITY_QUEUES = {k:v for k,v in [(i, deque()) for i in range(1, 6)]}
         self.ONGOING_TASKS = []
         self.team = team
+        self.database = database.open_database()
 
-
-    def add_task(self, new_task:Task):
+    def add_task_incoming(self, new_task:Task):
         queue_nb = self.update_task_priority(new_task)
         self.PRIORITY_QUEUES[queue_nb].appendleft(new_task)
-        if (team.manpower_pts> 0) : 
-            pass
+
+        database.store_task_to_database(self.database, new_task)
             
 
     def nb_hours_until_deadline(self, deadline) :
@@ -52,6 +54,9 @@ class MLFQ:
 
         # Add the task to its new priority queue
         self.PRIORITY_QUEUES[task.priority].appendleft(task)
+
+        # Updating record in the database
+        db_utils.update_record(self.database, name = "Tasks", set = "priority = ?", where = "id = ?", values=(task.priority, task.task_id))
 
         return task.priority
 
