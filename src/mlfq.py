@@ -153,7 +153,7 @@ class MLFQ:
                         # If the task was seen before in the update, don't check it twice.
                         pass
     
-    
+    def periodic_ongoing_update(self, current_time:datetime.time):
 
     def change_status_to_ongoing(self, task:Task):
         database.update_task(self.database, task, Status.ONGOING)
