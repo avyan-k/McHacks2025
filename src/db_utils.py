@@ -3,18 +3,18 @@ import sqlite3 as sql
 def connect_to_database(db_name):
     return sql.connect(db_name)
 
-def create_table(cursor, name, schema):    
+def create_table(connection, name, schema):    
+    cursor = connection.cursor()
     cursor.execute(f"CREATE TABLE IF NOT EXISTS {name} ({schema})")
     connection.commit()
 
 def insert_record(cursor, name, columns, values):
     placeholders = ", ".join("?" for _ in values)  # Generate "?" placeholders
     query = f"INSERT INTO {name} ({columns}) VALUES ({placeholders})"
-    print(query)
     cursor.execute(query, values)
     connection.commit()
 
-def query_data(cursor, query: str, params) :
+def query_data(cursor, query: str, params = None) :
     cursor.execute(query, params or ())
     return cursor.fetchall()
 
