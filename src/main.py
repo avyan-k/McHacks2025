@@ -31,6 +31,7 @@ def main():
     while running:
         time_now = datetime.datetime.now().time()
         while len(app.WEB_QUEUE) > 0:
+            print(app.WEB_QUEUE)
             current_task = app.WEB_QUEUE.pop()
             algorithm.add_task_incoming(current_task)
 

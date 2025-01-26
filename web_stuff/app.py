@@ -23,7 +23,7 @@ import task
 
 class TaskForm(FlaskForm):
     name = StringField('Task name', validators=[DataRequired(), Length(5, 40)])
-    deadline = DateField('Deadline', format='%d-%m-%Y')
+    deadline = DateField('Deadline', format='%Y-%m-%d')
     estimated_time = StringField('Estimated Hours', validators=[DataRequired(), Length(1, 6 )])
     priority = StringField('Priority', validators=[DataRequired(), Length(1 , 2)])
     submit = SubmitField('Submit')
@@ -34,6 +34,7 @@ def home():
     if form.validate_on_submit():
         form_task = task.Task(form.name.data,form.deadline.data,form.estimated_time.data,form.priority.data)
         WEB_QUEUE.append(form_task)
+        print(form_task)
         form_task = TaskForm(formdata=None)
     connection = database.open_database()
     tasks_dict = {}
