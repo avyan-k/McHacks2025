@@ -9,8 +9,8 @@ import datetime
 
 
 def open_database(filename = "mchacks25.db"):
-    if os.path.isfile(filename):
-        os.remove(filename)
+    # if os.path.isfile(filename):
+    #     os.remove(filename)
     conn = connect_to_database(filename)
     create_table(conn, "Tasks", """
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -87,25 +87,24 @@ def update_task(database,task:Task, status:Status):
     insert_record(database, f"{new_status_name_string}_Task", "task_id", (task.task_id,))
     task.status = status
     
-def get_all_tasks_of_status(status:Status):
+def get_all_tasks_of_status(database,status:Status):
     status_name_string = status.name
     return [Task.fromquery(query,status) for query in query_data(database.cursor(), f"SELECT Tasks.* FROM Tasks JOIN {status_name_string}_Task ON Tasks.id = {status_name_string}_Task.task_id;")]
 
-def get_all_tasks_of_status_with_priority(status:Status,priority:int):
+def get_all_tasks_of_status_with_priority(database,status:Status,priority:int):
     status_name_string = status.name
     return [Task.fromquery(query,status) for query in query_data(database.cursor(), f"SELECT Tasks.* FROM Tasks JOIN {status_name_string}_Task ON Tasks.id = {status_name_string}_Task.task_id WHERE Tasks.priority = {priority};")]
 
 if __name__ == "__main__":
     database = open_database()
     test_task1 = Task(name = "First",deadline = datetime.date.fromisoformat('20191204'), estimated_time = 10,priority = 0, status=Status.INCOMING)
-    test_task2 = Task(name = "First",deadline = datetime.date.fromisoformat('20161204'), estimated_time = 5,priority = 3, status=Status.INCOMING)
+    test_task2 = Task(name = "second",deadline = datetime.date.fromisoformat('20161204'), estimated_time = 5,priority = 3, status=Status.INCOMING)
     store_task_to_database(database,test_task1)
     store_task_to_database(database,test_task2)
     tasks = query_data(database.cursor(), "SELECT * FROM Tasks")
     print("Tasks:", tasks)
-    print(get_all_tasks_of_status(Status.INCOMING))
+    print(*get_all_tasks_of_status(database,Status.INCOMING))
     update_task(database,test_task1,status=Status.COMPLETE)
     print(query_data(database.cursor(), "SELECT Tasks.* FROM Tasks JOIN COMPLETE_Task ON Tasks.id = COMPLETE_Task.task_id;"))
-    print(*get_all_tasks_of_status_with_priority(Status.INCOMING,3))
-    print("hi")
+    print(*get_all_tasks_of_status_with_priority(database,Status.INCOMING,3))
 
