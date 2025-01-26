@@ -1,0 +1,205 @@
+
+body {
+    margin: 0;
+    font-family: 'Lexend Zetta', sans-serif;
+    background-color: #B2CAF6;
+}
+
+
+.container {
+    width: 1440px;
+    height: 1024px;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+.title-bar {
+    position: absolute;
+    top: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}
+
+
+.team-section {
+    position: absolute;
+    top: 82px;
+    left: 29px;
+}
+
+.team-box {
+    width: 250px;
+    height: 71px;
+    background-color: #AC98BC;
+    border-radius: 32px;
+    position: relative;
+}
+
+.team-text {
+    color: white;
+    font-size: 24px;
+    font-family: 'Mochiy Pop One', sans-serif;
+    padding: 20px 20px 0 20px;
+}
+
+.team-indicator {
+    width: 24px;
+    height: 12px;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    background-color: white;
+    border: 5px solid #FFF3F3;
+}
+
+.columns {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 240px;
+    left: 29px;
+    justify-content: center;
+    width: calc(100% - 58px);
+}
+
+.column {
+    flex: 1;
+    max-width: 308px;
+    height: 650px;
+    background: linear-gradient(180deg, #EAD6B2 0%, #FFF8EA 100%);
+    border-radius: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 26px 22px;
+    position: relative;
+}
+
+/* Column Titles */
+.column-title {
+    color: white;
+    font-size: 24px;
+    font-family: 'Mochiy Pop One', sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Task Boxes */
+.task-box {
+    width: 263px;
+    height: 99px;
+    border-radius: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.incoming {
+    background-color: #9FE2FF;
+}
+
+.incomplete {
+    background-color: #F1A1A2;
+}
+
+.in-progress {
+    background-color: #EBF0A2;
+}
+
+.done {
+    background-color: #A2F0AB;
+}
+
+.task-title {
+    font-size: 24px;
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+.dropdown-button {
+    color: white;
+    font-size: 24px;
+    padding: 5px 10px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;  /* Vertically center the content */
+    justify-content: space-between; /* Place the triangle at the far right */
+    width: 100%;  /* Ensure button takes full width */
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid white;
+    margin-left: 10px;  /* Add space between the text and the triangle */
+}
+
+
+
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 37px; 
+    left: 0;
+    background-color: #D9CDE2;
+    border-radius: 10px;
+    padding: 10px 0;
+    width: 250px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 800ms ease-out; 
+    z-index: 10; 
+}
+
+
+.team-box:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    pointer-events: auto; 
+}
+
+
+.dropdown-item {
+    padding: 10px 20px;
+    background-color: #D9CDE2;
+    color: #333;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+
+.dropdown-item:hover {
+    background-color: #BCADC7;
+}
+
+
+.team-text {
+    color: white;
+    font-size: 20px;
+    font-family: 'Mochiy Pop One', sans-serif;
+    padding: 15px 15px 0 15px;
+    
+}
