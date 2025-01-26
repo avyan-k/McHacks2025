@@ -11,7 +11,7 @@ class Team:
     delta values accepted into priority queue 1,2,3,4  for the team. Queue 5 will take any task exceeding
     the value for 4.
     """
-    def __init__(self, devs:dict = None, manpower_pts:int = 0, max_mp_percentage:float=0, priority_queues_intervals:dict=None ):
+    def __init__(self, devs:dict = None, manpower_pts:int = 0, max_mp_percentage:float=0.5, priority_queues_intervals:dict=None ):
         if devs is not None:
             self.devs = devs
         else:

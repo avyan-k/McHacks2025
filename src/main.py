@@ -4,11 +4,24 @@ from dev import Dev
 from mlfq import *
 import datetime
 import database
+import data_generation
+
+
+def populate_database(algorithm:MLFQ, team:Team):
+    task_list, dev_list = data_generation.generate_data()
+    for task in task_list:
+        algorithm.add_task_incoming(task)
+    for dev in dev_list:
+        team.add_dev(dev)
 
 def main():
     running = True
     default_team=Team()
     algorithm = MLFQ(default_team)
+
+    populate_database(algorithm, default_team)
+    default_team.update_manpower_global()
+
     while running:
         time_now = datetime.datetime.now().time()
 
