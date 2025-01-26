@@ -2,6 +2,7 @@ from collections import deque
 import datetime
 from task import Task
 from team import Team
+import math 
 
 
 class MLFQ:
@@ -9,14 +10,14 @@ class MLFQ:
         self.PRIORITY_QUEUES = {k:v for k,v in [(i, deque()) for i in range(1, 6)]}
         self.ONGOING_TASKS = []
         self.team = team
-        self.remaing_manpower = team.manpower_pts
 
 
     def add_task(self, new_task:Task):
         queue_nb = self.update_task_priority(new_task)
         self.PRIORITY_QUEUES[queue_nb].appendleft(new_task)
-        if (self.remaing_manpower > 0) : 
-            pass 
+        if (team.manpower_pts> 0) : 
+            pass
+            
 
     def nb_hours_until_deadline(self, deadline) :
         now = datetime.datetime.now()
@@ -29,7 +30,7 @@ class MLFQ:
         :param task: The task whose delta value we are calculating
         :return: task.deadline - current_time - task.estimated_time
         """
-        return self.nb_hours_until_deadline(task.deadline) - task.estimated_time
+        return self.nb_hours_until_deadline(task.deadline) - math.ceil(task.estimated_time / 3600)
 
     def update_task_priority(self, task:Task):
         """
