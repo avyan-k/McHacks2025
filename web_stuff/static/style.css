@@ -222,3 +222,19 @@ body {
     padding: 15px 15px 0 15px;
     
 }
+.row {
+    overflow: hidden;
+    width: 2000px;
+  }
+  
+  .inner {
+    overflow: hidden;
+    width: 200px;
+  }
+  
+  .child {
+    float: right;
+    width: 500px;
+    height: 30px;
+    margin-top: 50px;
+  }
